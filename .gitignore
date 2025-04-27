@@ -1,0 +1,6 @@
+venv
+image.jpg
+processed_image.jpg
+image_processor
+image_hex.txt
+output_hex.txt
