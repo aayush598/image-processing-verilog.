@@ -16,7 +16,7 @@ def run_command(command, description):
 
 def main():
     # Input image file
-    input_image = "image.jpg"
+    input_image = "image3.jpg"
     
     # Check if input image exists
     if not os.path.exists(input_image):
@@ -28,10 +28,10 @@ def main():
         return False
     
     # Step 2: Run image processing using iverilog
-    if not run_command("iverilog -o image_processor image_processor.v", "Compiling Verilog code"):
+    if not run_command("iverilog -o image_processor_sim image_processor.v image_processor_tb.v", "Compiling Verilog code"):
         return False
     
-    if not run_command("vvp image_processor", "Running image processing simulation"):
+    if not run_command("vvp image_processor_sim", "Running image processing simulation"):
         return False
     
     # Step 3: Convert processed hex values back to image

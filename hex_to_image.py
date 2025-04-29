@@ -29,16 +29,22 @@ def hex_to_image(input_hex_path, output_image_path, width=512, height=512):
         
         # Fill the image array with pixel values
         pixel_index = 0
+        # Fill the image array with RGB pixel values
+        img = np.zeros((height, width, 3), dtype=np.uint8)
+
         for y in range(height):
             for x in range(width):
                 if pixel_index < len(pixel_lines):
+                    hex_str = pixel_lines[pixel_index]
                     try:
-                        pixel_value = int(pixel_lines[pixel_index], 16)
-                        img[y, x] = pixel_value
+                        r = int(hex_str[0:2], 16)
+                        g = int(hex_str[2:4], 16)
+                        b = int(hex_str[4:6], 16)
+                        img[y, x] = [b, g, r]  # OpenCV BGR format
                     except ValueError:
-                        print(f"Warning: Invalid hex value at line {pixel_index + 1}: {pixel_lines[pixel_index]}")
-                        img[y, x] = 0
+                        img[y, x] = [0, 0, 0]
                 pixel_index += 1
+
         
         # Save the image
         cv2.imwrite(output_image_path, img)

@@ -26,17 +26,18 @@ def image_to_hex(input_image_path, output_hex_path, resize_dimensions=(512, 512)
     else:
         img_gray = img_resized
     
-    # Convert pixel values to hex and write to file
+    # RGB to hex writer
     with open(output_hex_path, 'w') as f:
-        height, width = img_gray.shape
+        height, width, _ = img_resized.shape
         f.write(f"// Image dimensions: {width}x{height}\n")
-        f.write(f"// Format: 8-bit grayscale\n")
+        f.write(f"// Format: 24-bit RGB\n")
         
         for y in range(height):
             for x in range(width):
-                pixel_value = img_gray[y, x]
-                hex_value = format(pixel_value, '02x')
+                b, g, r = img_resized[y, x]  # OpenCV uses BGR
+                hex_value = '{:02x}{:02x}{:02x}'.format(r, g, b)
                 f.write(hex_value + "\n")
+
     
     print(f"Converted {input_image_path} to hex format and saved to {output_hex_path}")
     print(f"Image resized to {resize_dimensions[0]}x{resize_dimensions[1]}")

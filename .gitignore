@@ -1,6 +1,9 @@
 venv
 image.jpg
+image2.jpg
+image3.jpg
 processed_image.jpg
 image_processor
 image_hex.txt
 output_hex.txt
+image_processor_sim
