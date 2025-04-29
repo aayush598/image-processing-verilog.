@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ps / 1ps
 
 module image_processor_tb;
 
@@ -19,7 +19,7 @@ module image_processor_tb;
     );
 
     // Clock generation
-    always #5 clk = ~clk;
+    always #151 clk = ~clk;
 
     initial begin
         // Initialize

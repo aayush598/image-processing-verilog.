@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module image_processor(
     input wire clk,
     input wire rst,
