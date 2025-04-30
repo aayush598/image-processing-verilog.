@@ -38,6 +38,18 @@ def main():
     if not run_command("python hex_to_image_ip.py", "Converting hex back to image"):
         return False
     
+    # Step 4: Run Yosys synthesis
+    if not run_command("yosys synth.ys", "Running Yosys synthesis"):
+        return False
+
+    # Step 5: Generate SVG from netlist
+    if not run_command("netlistsvg image_processor.json -o image_processor.svg", "Generating SVG from netlist"):
+        return False
+
+    # Step 6: Convert SVG to PDF
+    if not run_command("rsvg-convert -f pdf -o image_processor.pdf image_processor.svg", "Converting SVG to PDF"):
+        return False
+    
     print("\n=== All operations completed successfully! ===")
     print(f"Processed image saved as processed_image.jpg")
     

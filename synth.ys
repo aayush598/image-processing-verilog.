@@ -1,0 +1,4 @@
+read_verilog image_processor_ip.v
+hierarchy -check -top image_processor
+proc; opt; fsm; opt; techmap; opt
+write_json image_processor.json
