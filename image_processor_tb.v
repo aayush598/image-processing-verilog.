@@ -31,7 +31,7 @@ module image_processor_tb;
 
         #20 rst = 0;
         // Wait long enough for processing
-        #10000000;
+        #100000000;
 
         $finish;
     end
