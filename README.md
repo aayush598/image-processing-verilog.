@@ -105,6 +105,55 @@ This script will:
 - Compile and run the Verilog simulation.
 - Convert output_hex.txt to processed_image.jpg.
 
+
+## 5. Image Processing IP Flow (Hardware Design and Visualization)
+
+The `run_all_ip.py` script extends the main pipeline by integrating Verilog simulation and RTL visualization into a single automated flow. It is ideal if you're working on custom hardware designs for image processing and want to visualize your synthesized design.
+
+Run it using:
+
+```bash
+python run_all_ip.py
+```
+
+This script will:
+
+1. Convert `image3.jpg` to `image_hex.txt`.
+2. Simulate your custom image processing logic in `image_processor_ip.v` using `iverilog` and `vvp`.
+3. Convert the processed hex values in `output_hex.txt` back to a grayscale image (`processed_image.jpg`).
+4. Synthesize the Verilog code using **Yosys** (`synth.ys` must be present).
+5. Generate an RTL diagram in SVG format using **netlistsvg**.
+6. Convert the SVG to a PDF using **rsvg-convert** for easy sharing and documentation.
+
+### Output Files:
+
+- `processed_image.jpg`: The final image after simulation.
+- `image_processor.svg`: SVG RTL schematic.
+- `image_processor.pdf`: PDF version of RTL schematic for reports.
+
+### Additional Tools Required:
+
+Install the following if not already installed:
+
+```bash
+# For synthesis
+sudo apt install yosys
+
+# For RTL visualization
+npm install -g netlistsvg
+
+# For converting SVG to PDF
+sudo apt install librsvg2-bin
+```
+
+Make sure you also have a `synth.ys` file like:
+
+```yosys
+read_verilog image_processor_ip.v
+synth -top image_processor_ip
+write_json image_processor.json
+```
+
 ### Notes
 Image Size: The scripts default to resizing images to 512x512. You can change this by modifying the resize_dimensions parameter in image_to_hex.py and the width and height parameters in hex_to_image.py. Make sure these dimensions match!
 <br>Grayscale: The scripts currently work with grayscale images. You would need to modify them to handle color images.
