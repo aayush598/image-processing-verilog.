@@ -33,7 +33,7 @@ module image_processor_bram #(
     reg [15:0] gray_calc;
     reg [7:0] gray;
 
-    always @(posedge clk) begin
+    always @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= IDLE;
             addr <= 0;
@@ -95,23 +95,5 @@ module image_processor_bram #(
             endcase
         end
     end
-
-    // Simulation-only memory write
-    task load_pixel;
-        input integer index;
-        input [23:0] value;
-        begin
-            if (index < IMAGE_SIZE)
-                bram[index] = value;
-        end
-    endtask
-
-    // Simulation-only memory read
-    function [23:0] read_pixel;
-        input integer index;
-        begin
-            read_pixel = bram[index];
-        end
-    endfunction
 
 endmodule

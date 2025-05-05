@@ -18,6 +18,7 @@ module tb_image_processor_bram;
 
     integer i;
 
+    // Instantiate the image processor module
     image_processor_bram #(
         .IMAGE_WIDTH(IMAGE_WIDTH),
         .IMAGE_HEIGHT(IMAGE_HEIGHT)
@@ -50,9 +51,9 @@ module tb_image_processor_bram;
         #20;
         rst = 0;
 
-        // Preload some image pixels
+        // Preload some image pixels manually
         for (i = 0; i < IMAGE_SIZE; i = i + 1) begin
-            uut.load_pixel(i, {8'd100 + i, 8'd50 + i, 8'd25 + i});
+            uut.bram[i] = {8'd100 + i, 8'd50 + i, 8'd25 + i};  // Simulate the image data
         end
 
         #20;
@@ -65,7 +66,7 @@ module tb_image_processor_bram;
 
         $display("Image processing completed.\nProcessed Pixels:");
         for (i = 0; i < IMAGE_SIZE; i = i + 1) begin
-            $display("Pixel[%0d] = %h", i, uut.read_pixel(i));
+            $display("Pixel[%0d] = %h", i, uut.bram[i]);
         end
 
         $finish;
