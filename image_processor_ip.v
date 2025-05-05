@@ -96,4 +96,22 @@ module image_processor_bram #(
         end
     end
 
+    // Simulation-only memory write
+    task load_pixel;
+        input integer index;
+        input [23:0] value;
+        begin
+            if (index < IMAGE_SIZE)
+                bram[index] = value;
+        end
+    endtask
+
+    // Simulation-only memory read
+    function [23:0] read_pixel;
+        input integer index;
+        begin
+            read_pixel = bram[index];
+        end
+    endfunction
+
 endmodule
