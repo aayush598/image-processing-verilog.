@@ -16,7 +16,7 @@ def run_command(command, description):
 
 def main():
     # Input image file
-    input_image = "image3.jpg"
+    input_image = "image.jpg"
     
     # Check if input image exists
     if not os.path.exists(input_image):

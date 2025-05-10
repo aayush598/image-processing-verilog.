@@ -14,7 +14,7 @@ module image_processor_bram #(
     output reg pixel_valid_out
 );
 
-    // BRAM declaration
+    // BRAM declaration 
     reg [23:0] bram [0:IMAGE_SIZE-1];
 
     // FSM state encoding
