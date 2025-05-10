@@ -7,7 +7,6 @@ image_hex.txt
 output_hex.txt
 image_processor_sim
 grayscale_math.jpg
-*.txt
 processed_brightness.jpg
 processed_grayscale.jpg
 processed_invert.jpg
